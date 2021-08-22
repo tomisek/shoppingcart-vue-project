@@ -1,8 +1,11 @@
 <template>
-<div>
-  <ProductListItem v-for="(c, index) of productItems" :key="index" :productItem="c" />
+<div class="conatiner is-fluid">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent" >
+      
+    </div><ProductListItem v-for="(c, index) of productItems" :key="index" :productItem="c" />
+  </div> 
 </div>
-  
 </template>
 
 <script>

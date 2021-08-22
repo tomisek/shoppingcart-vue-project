@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 // State is a place where our global variables goes.
 const state = {
   productItems: [],
+  cartItems: []
   
 }
 

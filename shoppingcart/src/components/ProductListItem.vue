@@ -1,10 +1,32 @@
 <template>
-  <div>
-    <h3>Name: {{ productItem.product_name }}</h3>
-    <h3>Price: {{ productItem.retail_price }}</h3>
-    
-    <a @click="additem">Add to cart</a>
-  </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <h4>{{ productItem.product_name }}</h4>
+          <a
+            class="button is-rounded is-pulled-left"
+            @click="addCartItem(productItem)"
+          >
+            <strong>Add to Cart</strong>
+          </a>
+          <br />
+          <p class="mt-4">
+            {{ productItem.product_category }}
+          </p>
+        </div>
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-6">{{ productItem.product_url }}</p>
+            <!-- <p class="subtitle is-7">{{ productItem.email }}</p> -->
+          </div>
+          <div class="media-right">
+            <a class="button is-primary is-light">
+              <strong>sek {{ productItem.retail_price }}</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -25,25 +47,3 @@ export default {
   }, */
 };
 </script>
-<style scoped>
-div {
-  background-color: rgb(236, 227, 214);
-  display: inline-block;
-  border: 1px solid grey;
-  border-radius: 5px;
-  width: 300px;
-  margin: 40px 10px 0 10px;
-  padding: 10px;
-  box-shadow: 0 0 5px 2px rgb(109, 108, 108);
-}
-
-
-
-a {
-  margin-top: -330px;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-</style>
