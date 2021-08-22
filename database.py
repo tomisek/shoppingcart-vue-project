@@ -16,7 +16,12 @@ async def run(query, values={}):
 async def getItems():
     return await get('SELECT * FROM items')
 
+async def getCartItems():
+    return await get('SELECT * FROM cart')
+
 async def deleteItemById(id):
     return await db.run('DELETE FROM items WHERE id = :id', {"id": id})
+
+
 
 

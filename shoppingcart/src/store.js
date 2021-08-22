@@ -14,6 +14,10 @@ const mutations = {
     state.productItems = productItems
     console.log(productItems)
   },
+  updateCartItems(state, cartItems){
+    state.cartItems = cartItems
+    console.log(cartItems)
+  }
   
 }
 
@@ -26,7 +30,15 @@ const actions = {
 
     // We replace state.cars with the cars we grabbed.
     store.commit('setItems', data)
+  },
+  async getCartItems(store){
+    let response = await fetch('/rest/cart')
+    let data = await response.json()
+    console.log(data)
+
+    store.commit('updateCartItems', data)
   }
+
 }
 
 export default createStore({state, mutations, actions})

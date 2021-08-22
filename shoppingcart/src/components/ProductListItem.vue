@@ -16,8 +16,7 @@
         </div>
         <div class="media">
           <div class="media-content">
-            <p class="title is-6">{{ productItem.product_url }}</p>
-            <!-- <p class="subtitle is-7">{{ productItem.email }}</p> -->
+            <a href="url" class="title is-6">{{ productItem.product_url }}</a>   
           </div>
           <div class="media-right">
             <a class="button is-primary is-light">
@@ -30,8 +29,12 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   props: ["productItem"],
+  methods: {
+      ...mapActions(["addCartItem"]),
+  }
   /* methods: {
     async deleteCar() {
       // console.log(this.car)
