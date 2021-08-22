@@ -1,9 +1,8 @@
 <template>
 <div class="conatiner is-fluid">
   <div class="tile is-ancestor">
-    <div class="tile is-parent" >
-      
-    </div><ProductListItem v-for="(c, index) of productItems" :key="index" :productItem="c" />
+    <div class="tile is-parent" v-for="productItem in productItems" :key="productItem.id" >
+    <ProductListItem :productItem="productItem"/>
   </div> 
 </div>
 </template>
