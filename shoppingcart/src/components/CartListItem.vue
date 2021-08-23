@@ -4,7 +4,7 @@
       <p class="is-inline">{{cartItem.product_name}}</p>
       <div>
         <span class="cart-item--price has-text-info has-text-weight-bold">
-        sek {{cartItem.retail_price}} X <!-- {{cartItem.quantity}} -->
+        sek {{cartItem.retail_price}} X {{cartItem.quantity}}
         </span>
 
         <span>
