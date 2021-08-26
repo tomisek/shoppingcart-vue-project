@@ -46,9 +46,9 @@ export default {
         },
         ...mapGetters(["cartItems", "cartTotal", "cartQuantity"])
     },
-    /* created(){
-        this.$store.dispatch('updateCartItems')
-    } */
+    created(){
+        this.$store.dispatch('getCartItems')
+    }
     
 }
 </script>
