@@ -33,20 +33,45 @@ import {mapActions} from 'vuex'
 export default {
   props: ["productItem"],
   methods: {
-      ...mapActions(["addCartItem"]),
-  }
-  /* methods: {
-    async deleteCar() {
-      // console.log(this.car)
-      let carToDelete = await fetch('/rest/cars/' + this.car.id, {
-        method: 'DELETE'
-      })
-      console.log(carToDelete)
+      /* ...mapActions(["addCartItem"]), */
+      async addCartItem(){
+        
+        let newCartProduct = {
+          id: this.productItem.id,
+          productUrl: this.productItem.product_url,
+          productName: this.productItem.product_name,
+          productCategory: this.productItem.product_category,
+          retailPrice: this.productItem.retail_price,
+          quantity: 1
+        }
+        let cartItem = await fetch('/rest/cart', {
+          method: 'POST',
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(newCartProduct),
+        
+        })
+        //console.log(newCartProduct)
+        let cartProducts = this.$store.state.cartItems
+        let cartProductExists = false;
+        cartProducts.map((cartProduct) =>  {
+          if(cartProduct.id === newCartProduct.id){
+            cartProduct.quantity++;
+            cartProductExists = true;
+          }
+        });
+        if(!cartProductExists) cartProducts.push(newCartProduct);
+        console.log(cartProducts) //ITS WORKING UNTIL HERE!!!!!!!
+        
+        cartItem = await cartItem.json()
 
-      if(carToDelete.ok){
-        this.$store.commit("removeCar", this.car);
+        this.$store.commit('updateCartItems', cartProducts)
+       
+        console.log(cartItem)
+
+
       }
-    },
-  }, */
+
+  }
+  
 };
 </script>

@@ -34,7 +34,8 @@
   </div>
 </template>
 <script>
-import CartListItem from '../components/CartListItem.vue'
+import CartListItem from '../components/CartListItem.vue';
+import {mapGetters, mapActions} from "vuex";
 export default {
     components:{
         CartListItem
@@ -42,11 +43,12 @@ export default {
     computed:{
         cartItems(){
             return this.$store.state.cartItems
-        }
+        },
+        ...mapGetters(["cartItems", "cartTotal", "cartQuantity"])
     },
-    created(){
+    /* created(){
         this.$store.dispatch('updateCartItems')
-    }
+    } */
     
 }
 </script>

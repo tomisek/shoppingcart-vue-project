@@ -12,5 +12,13 @@ async def get_cartItems(req):
     from database import getCartItems
     return res.json(await getCartItems())
 
+@app.post('/rest/cart')
+async def post_item(req):
+    from database import addNewItem
+    cartItem = req.json
+
+    cartItem = await addNewItem(cartItem)
+    return res.json(cartItem)
+
 if __name__ == "__main__":    
     app.run(port=8000)

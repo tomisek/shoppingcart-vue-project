@@ -19,6 +19,19 @@ async def getItems():
 async def getCartItems():
     return await get('SELECT * FROM cart')
 
+async def addNewItem(cartItem):
+    query = 'INSERT INTO cart(id, product_url, product_name, product_category, retail_price, product_quantity)VALUES(:id, :product_url, :product_name, :product_category, :retail_price, :product_quantity)'
+    return await run(query, {
+        "id": cartItem['id'],
+        "product_url" : cartItem['productUrl'],
+        "product_name" : cartItem['productName'],
+        "product_category" : cartItem['productCategory'],
+        "retail_price" : cartItem['retailPrice'],
+        "product_quantity" : cartItem['quantity']
+
+    })
+    
+
 async def deleteItemById(id):
     return await db.run('DELETE FROM items WHERE id = :id', {"id": id})
 

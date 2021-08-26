@@ -9,18 +9,17 @@
 
 <script>
 import ProductListItem from "../components/ProductListItem.vue";
-
+import {mapGetters} from 'vuex';
 export default {
   components:{
     ProductListItem
   },
-  // Is a getter used to get data from vuex (store.js)
+  
   computed: {
-    // cars can be named to whatever..
     productItems(){
-      // We access Vue properties by adding $ in front of them
       return this.$store.state.productItems
-    }
+    },
+    ...mapGetters(['productItems'])
   },
 }
 </script>

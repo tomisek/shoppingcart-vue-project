@@ -22,7 +22,7 @@
               </router-link>
               <router-link to="/cart"  class="button is-warning">   <p>
     Total cart items:
-    <!-- <span> {{cartQuantity}}</span> --> </p>
+    <span> {{cartQuantity}}</span> </p>
               </router-link>
             </div>
           </div>
@@ -31,16 +31,16 @@
     </nav>
 </template>
 <script>
-//import {mapGetters} from "vuex"
+import {mapGetters} from "vuex"
 export default {
     name: "Navbar",
-/*     computed: {
+    computed: {
     ...mapGetters([
       'cartQuantity'
     ])
-  }, */
+  },
   created() {
-    //this.$store.dispatch("getCartItems");
+    this.$store.dispatch("getCartItems");
   }
 }
 </script>

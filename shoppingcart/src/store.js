@@ -1,16 +1,13 @@
 import { createStore } from 'vuex'
 
-// State is a place where our global variables goes.
 const state = {
   productItems: [],
   cartItems: []
   
 }
 
-// Mutations are functions that change or manipulate the state
-// NOTE: do not ever make changes to state variables directly.
 const mutations = {
-  setItems(state, productItems){
+  updateProductItems(state, productItems){
     state.productItems = productItems
     console.log(productItems)
   },
@@ -21,15 +18,13 @@ const mutations = {
   
 }
 
-// Are the asyncronous functions 
 const actions = {
   async getProductItems(store){
     let response = await fetch('/rest/items')
     let data  = await response.json()
     console.log(data)
 
-    // We replace state.cars with the cars we grabbed.
-    store.commit('setItems', data)
+    store.commit('updateProductItems', data)
   },
   async getCartItems(store){
     let response = await fetch('/rest/cart')
@@ -37,8 +32,38 @@ const actions = {
     console.log(data)
 
     store.commit('updateCartItems', data)
-  }
+  },
+  /* async addCartItem(){
+
+    let response = await fetch('/rest/cart', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(response)
+      
+    })
+    let data = await response.json()
+    console.log(data)
+
+  } */
 
 }
 
-export default createStore({state, mutations, actions})
+const getters = {
+  cartItems: state => state.cartItems,
+  cartTotal: state => {
+    return state.cartItems.reduce((acc, cartItem) => {
+      return (cartItem.quantity * cartItem.price) + acc;
+    }, 0).toFixed(2);
+  },
+  cartQuantity: state => {
+    return state.cartItems.reduce((acc, cartItem) => {
+      return cartItem.quantity + acc;
+    }, 0);
+  },
+  productItems: state => state.productItems,
+  productItemById: (state) => (id) => {
+    return state.productItems.find(productItem => productItem.id === id)
+  }
+}
+
+export default createStore({state, mutations, actions, getters})
