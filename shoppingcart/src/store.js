@@ -2,8 +2,7 @@ import { createStore } from 'vuex'
 
 const state = {
   productItems: [],
-  cartItems: []
-  
+  cartItems: [],
 }
 
 const mutations = {
@@ -11,9 +10,9 @@ const mutations = {
     state.productItems = productItems
     console.log(productItems)
   },
-  updateCartItems(state, cartItems){
-    state.cartItems = cartItems
-    console.log(cartItems)
+  updateCartItems(state, payload){
+    state.cartItems = payload
+    console.log(payload)
   }
   
 }
@@ -26,25 +25,13 @@ const actions = {
 
     store.commit('updateProductItems', data)
   },
-  async getCartItems(store){
+  /* async getCartItems(store){
     let response = await fetch('/rest/cart')
     let data = await response.json()
     console.log(data)
 
     store.commit('updateCartItems', data)
-  },
-  /* async addCartItem(){
-
-    let response = await fetch('/rest/cart', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(response)
-      
-    })
-    let data = await response.json()
-    console.log(data)
-
-  } */
+  }, */
 
 }
 
@@ -52,7 +39,7 @@ const getters = {
   cartItems: state => state.cartItems,
   cartTotal: state => {
     return state.cartItems.reduce((acc, cartItem) => {
-      return (cartItem.quantity * cartItem.price) + acc;
+      return (cartItem.quantity * cartItem.retailPrice) + acc;
     }, 0).toFixed(2);
   },
   cartQuantity: state => {

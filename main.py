@@ -17,6 +17,8 @@ async def post_item(req):
     from database import addNewItem
     cartItem = req.json
 
+    
+
     cartItem = await addNewItem(cartItem)
     return res.json(cartItem)
 

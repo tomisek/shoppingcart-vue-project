@@ -21,7 +21,7 @@
     </ul>
     <div class="buttons">
     <button :disabled="!cartItems.length" class="button is-info">
-      Checkout (<span class="has-text-weight-bold">sek{{ cartTotal }}</span>)
+      Checkout (<span class="has-text-weight-bold">sek {{ cartTotal }}</span>)
     </button>
 
  <button class="button is-danger is-outlined" @click="removeAllCartItems">
@@ -47,8 +47,9 @@ export default {
         ...mapGetters(["cartItems", "cartTotal", "cartQuantity"])
     },
     created(){
-        this.$store.dispatch('getCartItems')
-    }
+        /* this.$store.dispatch('getCartItems') */
+        /* return this.$store.state.cartItems */
+    } 
     
 }
 </script>

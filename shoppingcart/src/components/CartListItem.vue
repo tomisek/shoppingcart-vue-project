@@ -1,10 +1,10 @@
 <template>
   <div class="box">
     <div class="cart-item__details">
-      <p class="is-inline">{{cartItem.product_name}}</p>
+      <p class="is-inline">{{cartItem.productName}}</p>
       <div>
         <span class="cart-item--price has-text-info has-text-weight-bold">
-        sek {{cartItem.retail_price}} X {{cartItem.quantity}}
+        sek {{cartItem.retailPrice}} X {{cartItem.quantity}}
         </span>
 
         <span>
