@@ -18,10 +18,10 @@
           <div class="navbar-item">
             <div class="buttons">
               <router-link to="/inventory" class="button is-primary">
-               <strong> Inventory</strong>
+               <strong> Våra produkter</strong>
               </router-link>
               <router-link to="/cart"  class="button is-warning">   <p>
-    Total cart items:
+    Antal produkter i varukorgen:
     <span> {{cartQuantity}}</span> </p>
               </router-link>
             </div>

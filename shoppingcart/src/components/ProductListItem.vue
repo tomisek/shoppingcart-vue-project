@@ -7,7 +7,7 @@
             class="button is-rounded is-pulled-left"
             @click="addCartItem(productItem)"
           >
-            <strong>Add to Cart</strong>
+            <strong>Lägg i varukorg</strong>
           </a>
           <br />
           <p class="mt-4">

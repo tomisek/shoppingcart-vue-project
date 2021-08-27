@@ -13,7 +13,7 @@
       <div class="notification is-success">
         <button class="delete"></button>
         <p>
-          Total Quantity:
+          Antal produkter totalt:
           <span class="has-text-weight-bold">{{ cartQuantity }}</span>
         </p>
       </div>
@@ -21,11 +21,11 @@
     </ul>
     <div class="buttons">
     <button :disabled="!cartItems.length" class="button is-info">
-      Checkout (<span class="has-text-weight-bold">sek {{ cartTotal }}</span>)
+      Gå till betalningen (<span class="has-text-weight-bold">sek {{ cartTotal }}</span>)
     </button>
 
  <button class="button is-danger is-outlined" @click="removeAllCartItems">
-    <span>Delete All items</span>
+    <span>Töm kundvagnen</span>
     <span class="icon is-small">
       <i class="fas fa-times"></i>
     </span>
