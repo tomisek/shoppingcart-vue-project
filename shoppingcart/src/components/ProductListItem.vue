@@ -7,7 +7,7 @@
             class="button is-rounded is-pulled-left"
             @click="addCartItem(productItem)"
           >
-            <strong>Lägg i varukorg</strong>
+            <strong class="addedToCart">{{addMeToCart}}</strong>
           </a>
           <br />
           <p class="mt-4">
@@ -29,11 +29,15 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
 export default {
+  name: "ProductListItem",
   props: ["productItem"],
+  data(){
+    return{
+      addMeToCart: "Lägg i varukorgen"
+    }
+  },
   methods: {
-      /* ...mapActions(["addCartItem"]), */
       async addCartItem(){
         
         let newCartProduct = {
@@ -50,25 +54,41 @@ export default {
           body: JSON.stringify(newCartProduct),
         
         })
-        //console.log(newCartProduct)
+        console.log(cartItem)
         let cartProducts = this.$store.state.cartItems
+        let products = this.$store.state.productItems
+        console.log(products)
+        console.log(cartProducts)
         let cartProductExists = false;
         cartProducts.map((cartProduct) =>  {
           if(cartProduct.id === newCartProduct.id){
-            cartProduct.quantity++;
+            cartProduct.quantity ++;
             cartProductExists = true;
+            let added = window.confirm("Produkten redan inlagd. Vill du fortsätta till varukorgen?")
+            if(added){
+                 this.$router.push('/cart')
+            }else{
+                return false
+            } 
           }
         });
-        if(!cartProductExists) cartProducts.push(newCartProduct);
-        console.log(cartProducts) //ITS WORKING UNTIL HERE!!!!!!!
-        
-        cartItem = await cartItem.json()
-
-        this.$store.commit('updateCartItems', cartProducts)
-       
-        console.log(cartItem)
-      }
-  }
+        if(!cartProductExists){
+            this.$store.commit('appendCartItem', newCartProduct) 
+            this.addMeToCart = "Inlagd i varukorgen"
+            //this.$router.push('/cart')
+            this.$store.dispatch("getCartItems")
+            
+        }
+      },
+  },
   
 };
 </script>
+<style scoped>
+.card{
+  background-color: rgb(219, 246, 255);
+}
+.addedToCart{
+  color: green;
+}
+</style>

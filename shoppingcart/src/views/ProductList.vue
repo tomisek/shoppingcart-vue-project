@@ -11,15 +11,15 @@
 import ProductListItem from "../components/ProductListItem.vue";
 import {mapGetters} from 'vuex';
 export default {
+  name: "ProductList",
   components:{
-    ProductListItem
+    ProductListItem: ProductListItem
   },
-  
   computed: {
-    productItems(){
-      return this.$store.state.productItems
-    },
     ...mapGetters(['productItems'])
   },
+  created(){
+    this.$store.dispatch('getProductItems');
+  }
 }
 </script>

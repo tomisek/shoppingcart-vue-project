@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 
+
 const state = {
   productItems: [],
   cartItems: [],
@@ -10,9 +11,19 @@ const mutations = {
     state.productItems = productItems
     console.log(productItems)
   },
-  updateCartItems(state, payload){
-    state.cartItems = payload
+  updateCartItems(state, cartItems){
+    state.cartItems = cartItems
+    console.log(cartItems)
+  },
+  deleteCartItems(state, payload){
+    state.cartItems = []
     console.log(payload)
+  },
+  appendCartItem(state, cartItemToAppend){
+    state.cartItems.push(cartItemToAppend)
+  },
+  removeCartItem(state, cartItemToRemove){
+    state.cartItems = state.cartItems.filter(cartItem => cartItem != cartItemToRemove)
   }
   
 }
@@ -25,13 +36,13 @@ const actions = {
 
     store.commit('updateProductItems', data)
   },
-  /* async getCartItems(store){
+  async getCartItems(store){
     let response = await fetch('/rest/cart')
     let data = await response.json()
     console.log(data)
 
     store.commit('updateCartItems', data)
-  }, */
+  },
 
 }
 
@@ -39,18 +50,15 @@ const getters = {
   cartItems: state => state.cartItems,
   cartTotal: state => {
     return state.cartItems.reduce((acc, cartItem) => {
-      return (cartItem.quantity * cartItem.retailPrice) + acc;
+      return (cartItem.product_quantity * cartItem.retail_price) + acc;
     }, 0).toFixed(2);
   },
   cartQuantity: state => {
     return state.cartItems.reduce((acc, cartItem) => {
-      return cartItem.quantity + acc;
+      return cartItem.product_quantity + acc;
     }, 0);
   },
   productItems: state => state.productItems,
-  productItemById: (state) => (id) => {
-    return state.productItems.find(productItem => productItem.id === id)
-  }
 }
 
 export default createStore({state, mutations, actions, getters})

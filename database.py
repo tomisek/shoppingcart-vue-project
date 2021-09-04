@@ -27,13 +27,25 @@ async def addNewItem(cartItem):
         "product_name" : cartItem['productName'],
         "product_category" : cartItem['productCategory'],
         "retail_price" : cartItem['retailPrice'],
-        "product_quantity" : cartItem['quantity']
+        "product_quantity" : 1
 
     })
     
 
-async def deleteItemById(id):
-    return await db.run('DELETE FROM items WHERE id = :id', {"id": id})
+async def deleteCartItemById(id):
+    return await run('DELETE FROM cart WHERE id = :id', {"id": id})
+
+async def deleteAllCartItems():
+    return await run('DELETE FROM cart')
+
+async def getCartById(id):
+  return await get('SELECT * FROM cart WHERE id = :id', { "id": id })
+
+async def updateCartItemQuantity(id):
+    return await run('UPDATE cart SET product_quantity = product_quantity + 1 WHERE id = :id', {"id": id})
+
+async def downgradeCartItemQuantity(id):
+    return await run('UPDATE cart SET product_quantity = product_quantity - 1 WHERE id = :id', {"id": id})
 
 
 
