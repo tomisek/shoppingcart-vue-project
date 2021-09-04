@@ -7,11 +7,13 @@
       Add some items to the cart!
     </p>
     <ul>
+      <!-- <CartListItem class="cart-item" v-for="(c,index) of cartItems" :key="index" :cartItem="c"/> -->
       <li class="cart-item" v-for="cartItem in cartItems" :key="cartItem.id">
           <CartListItem :cartItem="cartItem"/>
+          
       </li>
+
       <div class="notification is-success">
-        <button class="delete"></button>
         <p>
           Antal produkter totalt:
           <span class="has-text-weight-bold">{{ cartQuantity }}</span>
@@ -35,21 +37,30 @@
 </template>
 <script>
 import CartListItem from '../components/CartListItem.vue';
-import {mapGetters, mapActions} from "vuex";
+import {mapGetters} from "vuex";
 export default {
+    name: "CartList",
     components:{
         CartListItem
     },
     computed:{
-        cartItems(){
-            return this.$store.state.cartItems
-        },
         ...mapGetters(["cartItems", "cartTotal", "cartQuantity"])
     },
     created(){
-        /* this.$store.dispatch('getCartItems') */
-        /* return this.$store.state.cartItems */
-    } 
-    
+      this.$store.dispatch("getCartItems")
+      
+    },
+    methods:{
+      async removeAllCartItems(){
+          let deleteAllCartItems = await fetch ('/rest/cart', {
+            method: 'DELETE'
+          })
+          this.$store.commit("deleteCartItems", deleteAllCartItems)
+      },  
+    }
 }
 </script>
+<style>
+
+   
+</style>
