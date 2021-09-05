@@ -22,9 +22,6 @@
 export default {
    name: 'CartListItem',
    props: ["cartItem"],
-   beforeUpdate(){
-      
-   }, 
    methods:{
     async updateCartItemQuantity(){
 
@@ -79,7 +76,7 @@ export default {
  .cart-item__modify{
    color: red;
  }
- .cart-item__details{
+ .box{
    background-color: rgb(229, 246, 252);
  }
 .delete-button__modify{

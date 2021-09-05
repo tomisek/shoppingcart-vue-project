@@ -4,7 +4,7 @@
       <i class="fa fa-2x fa-shopping-cart"></i>
     </div>
     <p v-if="!cartItems.length" class="cart-empty-text has-text-centered">
-      Add some items to the cart!
+      Lägg någon produkt i varukorgen!
     </p>
     <ul>
       <!-- <CartListItem class="cart-item" v-for="(c,index) of cartItems" :key="index" :cartItem="c"/> -->
