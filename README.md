@@ -1,2 +1,2 @@
 # shoppingcart-vue-project
-Individual project oop advanced vue
+Individual project oop advanced vue with sanic backend
