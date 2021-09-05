@@ -3,11 +3,11 @@
       <div class="card-content">
         <div class="content">
           <h4>{{ productItem.product_name }}</h4>
-          <a
-            class="button is-rounded is-pulled-left"
+          <a  
+            class="button is-info is-inverted is-pulled-left"
             @click="addCartItem(productItem)"
           >
-            <strong class="addedToCart">{{addMeToCart}}</strong>
+            <strong>{{addMeToCart}}</strong>
           </a>
           <br />
           <p class="mt-4">
@@ -19,9 +19,9 @@
             <a href="url" class="title is-6">{{ productItem.product_url }}</a>   
           </div>
           <div class="media-right">
-            <a class="button is-primary is-light">
+            <span class="box">
               <strong>sek {{ productItem.retail_price }}</strong>
-            </a>
+            </span>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default {
   props: ["productItem"],
   data(){
     return{
-      addMeToCart: "Lägg i varukorgen"
+      addMeToCart: "Lägg i varukorgen",
     }
   },
   methods: {
@@ -64,6 +64,7 @@ export default {
           if(cartProduct.id === newCartProduct.id){
             cartProduct.quantity ++;
             cartProductExists = true;
+            this.addMeToCart = "Inlagd i varukorgen"
             let added = window.confirm("Produkten redan inlagd. Vill du fortsätta till varukorgen?")
             if(added){
                  this.$router.push('/cart')
@@ -73,9 +74,8 @@ export default {
           }
         });
         if(!cartProductExists){
-            this.$store.commit('appendCartItem', newCartProduct) 
+            this.$store.commit('appendCartItem', newCartProduct)    
             this.addMeToCart = "Inlagd i varukorgen"
-            //this.$router.push('/cart')
             this.$store.dispatch("getCartItems")
             
         }
@@ -86,9 +86,6 @@ export default {
 </script>
 <style scoped>
 .card{
-  background-color: rgb(219, 246, 255);
-}
-.addedToCart{
-  color: green;
+  background-color: rgb(183, 243, 186);
 }
 </style>
