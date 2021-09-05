@@ -1,14 +1,24 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '/src/components/Home.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import CartList from './views/CartList.vue';
+import ProductList from './views/ProductList.vue';
+
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home,
-    },
+  {
+    path: '/inventory',
+    component: ProductList
+  },
+  {
+    path: '/cart',
+    component: CartList
+  },
+  {
+    path: '/',
+    redirect: '/inventory'
+  },
 ]
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHashHistory(),
+  routes
 })
+
 export default router
