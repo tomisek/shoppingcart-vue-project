@@ -24,22 +24,19 @@ export default {
    props: ["cartItem"],
    methods:{
       updateCartItemQuantity(){
-          
           let cartItemToUpdate = {
           id: this.cartItem.id,
           product_quantity: this.cartItem.product_quantity +1,
           }
           this.$store.dispatch("cartItemQuantityUp", cartItemToUpdate)
-          
-
           },
           
       deleteCartItemById(){
-            console.log()
             let cartItemIdToDelete = this.cartItem.id
             this.$store.dispatch('deleteCartById', cartItemIdToDelete)
       },
-        cartItemQuantityDown(){
+      
+      cartItemQuantityDown(){
         let cartItemToDowngrade = {
           id: this.cartItem.id,
           product_url: this.cartItem.product_url,
@@ -49,10 +46,6 @@ export default {
           retal_price: this.cartItem.retail_price
         }
         this.$store.dispatch('cartItemDown', cartItemToDowngrade)
-       
-        if(this.cartItem.product_quantity !== 0){
-          this.$store.dispatch("getCartItems", this.cartItem)     
-        }
       }
    }   
 }

@@ -38,21 +38,17 @@ export default {
     }
   },
   methods: {
-      addCartItem(/* eventObj */){
-          //eventObj.preventDefault()
+      addCartItem(){
           let newCartProduct = {id: this.productItem.id,
           productUrl: this.productItem.product_url,
           productName: this.productItem.product_name,
           productCategory: this.productItem.product_category,
           retailPrice: this.productItem.retail_price,
-          quantity: 1}//vi samlar inloggningsuppgifterna i en objekt(en variabel)
-          this.$store.dispatch('addingNewItems', newCartProduct)//vi kallar på action med kommandot dispatch
-
-          console.log(newCartProduct)
+          quantity: 1}
+     
           let cartProducts = this.$store.state.cartItems
           let products = this.$store.state.productItems
-          console.log(cartProducts)
-          console.log(products)
+           
           let cartProductExists = false;
         cartProducts.map((cartProduct) =>  {
           if(cartProduct.id === newCartProduct.id){
@@ -68,7 +64,7 @@ export default {
           }
         });
         if(!cartProductExists){
-            this.$store.commit('appendCartItem', newCartProduct)    
+            this.$store.dispatch('addingNewItems', newCartProduct)    
             this.addMeToCart = "Inlagd i varukorgen"
             this.$store.dispatch("getCartItems")    
         }     

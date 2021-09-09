@@ -66,7 +66,6 @@ const actions = {
   },
   async cartItemQuantityUp({dispatch}, cartItemToUpdate){
     let itemUp = {product_quantity: cartItemToUpdate.product_quantity}
-    console.log(itemUp)
     let response = await fetch ('/rest/cart/' + cartItemToUpdate.id, {
       method: 'PATCH',
       headers: {"Content-Type": "application/json"},
