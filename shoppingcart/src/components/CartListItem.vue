@@ -23,31 +23,23 @@ export default {
    name: 'CartListItem',
    props: ["cartItem"],
    methods:{
-    async updateCartItemQuantity(){
-
+      updateCartItemQuantity(){
+          
           let cartItemToUpdate = {
-          product_quantity: this.cartItem.product_quantity + 1,
+          id: this.cartItem.id,
+          product_quantity: this.cartItem.product_quantity +1,
           }
-          let cartItemUp = await fetch('/rest/cart/' + this.cartItem.id, {
-            method: 'PATCH', 
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(cartItemToUpdate)
-          })
-          console.log(cartItemUp)
-          if(cartItemUp.ok){
-              
-              this.$store.dispatch("getCartItems", this.cartItem)
-          }
+          this.$store.dispatch("cartItemQuantityUp", cartItemToUpdate)
+          
+
           },
-    async deleteCartItemById(){
-        let cartItemToDelete = await fetch('/rest/cart/' + this.cartItem.id, {
-          method: 'DELETE'
-        })
-        if(cartItemToDelete.ok){
-          this.$store.commit("removeCartItem", this.cartItem)
-        }
+          
+      deleteCartItemById(){
+            console.log()
+            let cartItemIdToDelete = this.cartItem.id
+            this.$store.dispatch('deleteCartById', cartItemIdToDelete)
       },
-    async cartItemQuantityDown(){
+        cartItemQuantityDown(){
         let cartItemToDowngrade = {
           id: this.cartItem.id,
           product_url: this.cartItem.product_url,
@@ -56,14 +48,7 @@ export default {
           product_quantity: this.cartItem.product_quantity - 1,
           retal_price: this.cartItem.retail_price
         }
-        let cartItemDown = await fetch('/rest/cart/' + this.cartItem.id, {
-          method: 'PUT',
-          headers: {"Content-Type": "application/json, charset=UTF-8"},
-          body: JSON.stringify(cartItemToDowngrade)
-        })
-        console.log(cartItemDown)
-        console.log(cartItemToDowngrade)
-        console.log(this.cartItem)
+        this.$store.dispatch('cartItemDown', cartItemToDowngrade)
        
         if(this.cartItem.product_quantity !== 0){
           this.$store.dispatch("getCartItems", this.cartItem)     
