@@ -51,11 +51,8 @@ export default {
       
     },
     methods:{
-      async removeAllCartItems(){
-          let deleteAllCartItems = await fetch ('/rest/cart', {
-            method: 'DELETE'
-          })
-          this.$store.commit("deleteCartItems", deleteAllCartItems)
+      removeAllCartItems(){ 
+          this.$store.dispatch("removeAllOurCartItems")   
       },  
     }
 }
