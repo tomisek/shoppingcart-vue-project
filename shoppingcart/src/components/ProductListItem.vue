@@ -46,9 +46,7 @@ export default {
           retailPrice: this.productItem.retail_price,
           quantity: 1}
      
-          let cartProducts = this.$store.state.cartItems
-          let products = this.$store.state.productItems
-           
+          let cartProducts = this.$store.state.cartItems     
           let cartProductExists = false;
         cartProducts.map((cartProduct) =>  {
           if(cartProduct.id === newCartProduct.id){

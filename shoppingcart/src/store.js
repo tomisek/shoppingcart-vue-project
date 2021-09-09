@@ -18,12 +18,6 @@ const mutations = {
     state.cartItems = []
     //console.log(payload)
   },
-  /* appendCartItem(state, cartItemToAppend){
-    state.cartItems.push(cartItemToAppend)
-  },
-  removeCartItem(state, cartItemToRemove){
-    state.cartItems = state.cartItems.filter(cartItem => cartItem != cartItemToRemove)
-  } */
 }
 const actions = {
   async getProductItems({commit}){
@@ -83,6 +77,7 @@ const actions = {
     dispatch('getCartItems')
   }
 }
+
 const getters = {
   cartItems: state => state.cartItems,
   cartTotal: state => {
